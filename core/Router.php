@@ -34,7 +34,7 @@ class Router {
         }
         [$controller, $action] = $parts;
 
-        $this->callAction($controller, $action, $route['params']);
+        echo $this->callAction($controller, $action, $route['params']);
     }
 
     protected function findRoute(string $uri, string $method): ?array {
