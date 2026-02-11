@@ -9,7 +9,7 @@ class ErrorHandler {
         if(php_sapi_name() === 'cli') { //error in w command line enviroment
             static::renderCliError($exception);
         } else { //error on a web server, need to render an error page
-           // static::renderErrorPage($exception);
+           static::renderErrorPage($exception);
         }
     }
 
@@ -33,6 +33,29 @@ class ErrorHandler {
             fwrite(STDERR, "\nStack trace:\n$trace\n");
         }
         exit(1); //exit code for CLI programs; 0 = everything is fine, 1 = an error
+    }
+
+    private static function renderErrorPage(\Throwable $exception):void {
+        $isDebug = App::get('config')['app']['debug'] ?? false;
+
+        if($isDebug) { //in debug mode
+            $errorMessage = static::formatErrorMessage(
+                $exception,
+                "[%s] Error: %s: %s in %s on line %d\n" 
+            );
+            $trace = $exception->getTraceAsString();
+        } else { 
+            $errorMessage = "An unexpected error occurred. Please check error log for details.\n";
+            $trace = "";
+        }
+
+            http_response_code(500);
+            echo View::render('errors/500', [
+                'errorMessage' => $errorMessage,
+                'trace' => $trace,
+                'isDebug' => $isDebug
+            ], 'layouts/main');
+        exit(); 
     }
 
     private static function logError(\Throwable $exception): void {
