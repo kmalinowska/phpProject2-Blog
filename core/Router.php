@@ -68,7 +68,7 @@ class Router {
     }
 
     protected function callAction(string $controller, string $action, array $params): mixed {
-        $controllerClass = "App\\Controller\\$controller";
+        $controllerClass = "App\\Controllers\\$controller";
 
         if(!class_exists($controllerClass)) {
             $this->notFound();
