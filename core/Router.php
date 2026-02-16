@@ -13,9 +13,9 @@ class Router {
         ];
     }
 
-    public function notFound(): void {
+    public static function notFound(): void {
         http_response_code(404);
-        echo "404 Not Found";
+        echo View::render('errors/404');
         exit;
     }
 
@@ -25,7 +25,7 @@ class Router {
         $route = $this->findRoute($uri, $method);
 
         if(!$route) {
-            $this->notFound();
+            static::notFound();
         }
 
         $parts = explode('@', $route['controller'],2);

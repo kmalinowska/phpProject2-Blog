@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers;
+use app\Models\Post;
+use core\Router;
 
 class PostController {
     public function index() {
@@ -8,6 +10,14 @@ class PostController {
     }
 
     public function show($id) {
-        return "Post nr $id";
+        // 1) Fetch
+        $post = Post::find($id);
+        // 2) 404
+        if(!$post) {
+            Router::notFound();
+        }
+        // 3) Load comments
+        // 4) Increment view number
+        // 5) Render the blog posts with the comments
     }
 }
