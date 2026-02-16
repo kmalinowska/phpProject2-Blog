@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use app\Models\Post;
+use app\Models\Comment;
 use core\Router;
 
 class PostController {
@@ -17,6 +18,7 @@ class PostController {
             Router::notFound();
         }
         // 3) Load comments
+        $comments = Comment::forPost($id);
         // 4) Increment view number
         // 5) Render the blog posts with the comments
     }
