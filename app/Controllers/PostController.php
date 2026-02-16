@@ -20,6 +20,7 @@ class PostController {
         // 3) Load comments
         $comments = Comment::forPost($id);
         // 4) Increment view number
+        Post::incrementViews($id);
         // 5) Render the blog posts with the comments
     }
 }
