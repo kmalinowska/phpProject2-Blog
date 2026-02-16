@@ -4,3 +4,4 @@
 [2026-02;11 20:05:14] Error: Exception: This has happened on the web! in C:\projects\PHP\Project2-Blog\app\Controller\HomeController.php on line 10
 [2026-02;11 20:06:22] Error: Exception: This has happened on the web! in C:\projects\PHP\Project2-Blog\app\Controller\HomeController.php on line 10
 [2026-02;11 20:08:06] Error: Exception: This has happened on the web! in C:\projects\PHP\Project2-Blog\app\Controller\HomeController.php on line 10
+[2026-02;15 18:30:49] Error: ErrorException: Creation of dynamic property App\Models\Post::$id is deprecated in C:\projects\PHP\Project2-Blog\core\Database.php on line 44

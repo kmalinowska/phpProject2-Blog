@@ -3,26 +3,17 @@
 namespace App\Controllers;
 
 use Core\View;
-use Exception;
-use App\Models\User;
+use App\Models\Post;
 
 class HomeController {
     public function index() {
-        User::create([
-            'name' => 'Piotr',
-            'email' => 'piotr@gmail.com',
-            'role' => 'admin',
-            'password' => password_hash('xyz123', PASSWORD_DEFAULT)
-        ]);
-        User::create([
-            'name' => 'Janusz',
-            'email' => 'janusz@gmail.com',
-            'role' => 'admin',
-            'password' => password_hash('januszek123', PASSWORD_DEFAULT)
-        ]);
+        $posts = Post::getRecent(5);
+
         return View::render(
             template: 'home/index', 
-            data: ['message' => 'Hello'],
+            data: [
+                'posts' => $posts
+            ],
             layout: 'layouts/main'
         );
     }
