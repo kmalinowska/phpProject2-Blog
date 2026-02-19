@@ -5,3 +5,11 @@
 [2026-02;11 20:06:22] Error: Exception: This has happened on the web! in C:\projects\PHP\Project2-Blog\app\Controller\HomeController.php on line 10
 [2026-02;11 20:08:06] Error: Exception: This has happened on the web! in C:\projects\PHP\Project2-Blog\app\Controller\HomeController.php on line 10
 [2026-02;15 18:30:49] Error: ErrorException: Creation of dynamic property App\Models\Post::$id is deprecated in C:\projects\PHP\Project2-Blog\core\Database.php on line 44
+[2026-02;19 12:23:26] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
+[2026-02;19 12:23:58] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
+[2026-02;19 12:24:08] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
+[2026-02;19 12:33:24] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
+[2026-02;19 12:33:31] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
+[2026-02;19 12:35:16] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
+[2026-02;19 12:40:04] Error: Error: Class "app\Models\Comment" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 22
+[2026-02;19 12:40:23] Error: Error: Class "core\View" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 26

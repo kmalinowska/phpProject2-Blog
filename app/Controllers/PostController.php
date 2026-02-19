@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Controllers;
-use app\Models\Post;
-use app\Models\Comment;
-use core\Router;
+use App\Models\Post;
+use App\Models\Comment;
+use Core\Router;
+use Core\View;
 
 class PostController {
     public function index() {
@@ -22,5 +23,10 @@ class PostController {
         // 4) Increment view number
         Post::incrementViews($id);
         // 5) Render the blog posts with the comments
+        return View::render(
+            template: 'post/show',
+            layout: 'layouts/main',
+            data: ['post' => $post, 'comments' => $comments]
+        );
     }
 }
