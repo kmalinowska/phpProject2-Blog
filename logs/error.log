@@ -13,3 +13,4 @@
 [2026-02;19 12:35:16] Error: Error: Class "app\Models\Post" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 16
 [2026-02;19 12:40:04] Error: Error: Class "app\Models\Comment" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 22
 [2026-02;19 12:40:23] Error: Error: Class "core\View" not found in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 26
+[2026-02;20 09:53:35] Error: TypeError: Core\Model::find(): Return value must be of type ?App\Models\Post, false returned in C:\projects\PHP\Project2-Blog\core\Model.php on line 14

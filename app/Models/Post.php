@@ -14,7 +14,7 @@ class Post extends Model {
     public $views;
     public $created_at;
 
-    public static function getRecent(?int $limit = null, ?string $search = null) {
+    public static function getRecent(?int $limit = null, ?int $page = null, ?string $search = null) {
         /** @var \Core\Database $db */ //doc block - to use method suggestions below
         $db = App::get('database');
 
@@ -33,7 +33,29 @@ class Post extends Model {
             $params[] = $limit;
         }
 
+        //PAGINATION
+        if($page !== null && $limit !== null) {
+            $offset = ($page - 1) * $limit; // page 1 = 0, page 2 = 10
+            $query .= " OFFSET ?";
+            $params[] = $offset;
+        }
+
         return $db->fetchAll($query, $params, static::class);
+    }
+
+    public static function count(?string $search = null): int {
+        /** @var \Core\Database $db */ //doc block - to use method suggestions below
+        $db = App::get('database');
+
+        $query = "SELECT COUNT(*) FROM " . static::$table;
+        $params = [];
+
+        if($search !== null) {
+            $query .= " WHERE title LIKE ? OR content LIKE ?";
+            $params = ["%$search%", "%$search%"];
+        }
+
+        return (int) $db->query($query, $params)->fetchColumn();
     }
 
     public static function incrementViews($id): void {
