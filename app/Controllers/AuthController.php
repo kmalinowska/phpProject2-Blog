@@ -20,6 +20,7 @@ class AuthController {
         //To do: verify CSRF token
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $remember = isset($_POST['remember']) ? (bool)$_POST['remember'] : false;
 
         //Attemp authentication
         if(Auth::attempt($email, $password)) {
