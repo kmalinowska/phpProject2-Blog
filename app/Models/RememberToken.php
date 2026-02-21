@@ -6,7 +6,7 @@ use Core\App;
 
 class RememberToken extends Model {
     protected static string $table = 'remember_tokens';
-    private const TOKEN_LIFETIME = 30 * 24 * 60 * 60; //30 days
+    public const TOKEN_LIFETIME = 30 * 24 * 60 * 60; //30 days
 
     public ?int $id;
     public int $user_id;

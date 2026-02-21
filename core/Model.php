@@ -10,7 +10,7 @@ abstract class Model {
         $db = App::get('database');
         return  $db->fetchAll("SELECT * FROM " . static::$table, [], static::class);
     }
-    public static function find(mixed $id): static | null {
+    public static function find(mixed $id): ?static {
         $db = App::get('database');
         return $db->fetch("SELECT * FROM " . static::$table . " WHERE id = ?", [$id], static::class);
     }
@@ -49,6 +49,16 @@ abstract class Model {
         $db->query($sql, $params);
         return $this;
 
+    }
+
+    public function delete(): void {
+        if(!isset($this->id)) {
+            return;
+        }
+
+         $db = App::get('database');
+         $sql = "DELETE FROM " . static::$table . " WHERE id = ?";
+         $db->query($sql, [$this->id]);
     }
 
 }
