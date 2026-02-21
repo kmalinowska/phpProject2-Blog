@@ -34,4 +34,9 @@ class AuthController {
             ]
         );
     }
+
+    public function destroy() {
+        Auth::logout();
+        Router::redirect('/login');
+    }
 }
