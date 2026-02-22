@@ -32,6 +32,7 @@ $db = App::get('database');
 $db->query("DELETE FROM comments");
 $db->query("DELETE FROM posts");
 $db->query("DELETE FROM users");
+$db->query("DELETE FROM remember_tokens");
 
 //optional: reset the auto increments, new inserted records start with index 1
 $db->query(

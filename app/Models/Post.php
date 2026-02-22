@@ -4,7 +4,7 @@ use Core\Model;
 use Core\App;
 
 class Post extends Model {
-    protected static $table = 'posts';
+    protected static string $table = 'posts';
 
     //define the fields every single model
     public $id;
