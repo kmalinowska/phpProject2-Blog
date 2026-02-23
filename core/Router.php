@@ -4,27 +4,37 @@ namespace Core;
 
 class Router {
     protected array $routes = [];
+    protected array $globalMiddleware = [];
+    protected array $routeMiddleware = [];
 
-    public function add(string $method, string $uri, string $controller):void {
+    public function add(string $method, string $uri, string $controller, array $middlewares = []):void {
         $this->routes[] = [
             'method' => strtoupper($method),
             'uri' => $uri,
-            'controller' => $controller
+            'controller' => $controller,
+            'middlewares' => $middlewares        
         ];
     }
 
+    //methods allows to add middlewares
+    public function addGlobalMiddleware(string $middleware) {
+        $this->globalMiddleware[] = $middleware;    
+    }
+    public function addRouteMiddleware(string $name, string $middleware) {
+        $this->routeMiddleware[$name] = $middleware;    
+    }
+
+    //error functions:
     public static function notFound(): void {
         http_response_code(404);
         echo View::render('errors/404');
         exit;
     }
-
     public static function unauthorized(): void {
         http_response_code(401);
         echo View::render('errors/401');
         exit;
     }
-
     public static function pageExpired(): void {
         http_response_code(419);
         echo View::render('errors/419');
@@ -40,13 +50,32 @@ class Router {
             static::notFound();
         }
 
-        $parts = explode('@', $route['controller'],2);
-        if(count($parts) !==2) {
-            throw new \Exception("Invalid controller format");
-        }
-        [$controller, $action] = $parts;
+        // auth -> App/Middlewares/AuthMiddleware
+        $routeMiddlewares = $route['middlewares'] ?? [];
+        $middlewares = [
+            ...$this->globalMiddleware,
+            ...array_map(
+                fn($name) => $this->routeMiddleware[$name], 
+                $routeMiddlewares
+            )
+        ];
 
-        echo $this->callAction($controller, $action, $route['params']);
+        $this->runMiddleware(
+            $middlewares, 
+            function () use ($route): void{
+                [$controller, $action] = explode('@', $route['controller']);
+                echo $this->callAction($controller, $action, $route['params']);
+            }
+        );
+    }
+
+    //function run all the middleware
+    protected function runMiddleware(array $middlewares, callable $target): mixed {
+        $next = $target;
+        foreach(array_reverse($middlewares) as $middleware) {
+            $next = (new $middleware)->handle($next);
+        }
+        return $next();
     }
 
     protected function findRoute(string $uri, string $method): ?array {
