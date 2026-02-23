@@ -5,8 +5,10 @@
 
 use App\Middlewares\View;
 use App\Middlewares\Auth;
+use App\Middlewares\CSRF;
 
 $router->addGlobalMiddleware(View::class);
+$router->addGlobalMiddleware(CSRF::class);
 $router->addRouteMiddleware('auth', Auth::class);
 
 $router->add('GET', '/', 'HomeController@index');
