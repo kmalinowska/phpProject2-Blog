@@ -73,7 +73,11 @@ class Router {
     protected function runMiddleware(array $middlewares, callable $target): mixed {
         $next = $target;
         foreach(array_reverse($middlewares) as $middleware) {
-            $next = (new $middleware)->handle($next);
+            //$next = fn() => (new $middleware)->handle($next);
+            $next = function() use ($middleware, $next) {
+                error_log("Middleware: running $middleware");
+                return (new $middleware)->handle($next);
+            };
         }
         return $next();
     }
