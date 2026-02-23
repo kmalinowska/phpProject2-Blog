@@ -17,3 +17,4 @@
 [2026-02;20 10:17:50] Error: ErrorException: Undefined array key "page" in C:\projects\PHP\Project2-Blog\app\Controllers\PostController.php on line 12
 [2026-02;20 15:42:54] Error: Error: Class "app\Models\User" not found in C:\projects\PHP\Project2-Blog\app\Services\Auth.php on line 9
 [2026-02;20 15:47:22] Error: ErrorException: session_regenerate_id(): Session ID cannot be regenerated when there is no active session in C:\projects\PHP\Project2-Blog\app\Services\Auth.php on line 13
+[2026-02;23 10:47:01] Error: Error: Unknown named parameter $id in C:\projects\PHP\Project2-Blog\core\Router.php on line 93
