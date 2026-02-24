@@ -35,6 +35,12 @@ class Router {
         echo View::render('errors/401');
         exit;
     }
+
+    public static function forbidden(): void {
+        http_response_code(403);
+        echo View::render('errors/403');
+        exit;
+    }
     public static function pageExpired(): void {
         http_response_code(419);
         echo View::render('errors/419');
