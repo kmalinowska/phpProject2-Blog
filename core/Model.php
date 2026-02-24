@@ -63,13 +63,20 @@ abstract class Model {
 
     public static function getRecent(
         ?int $limit = null, 
-        ?int $page = null
+        ?int $page = null,
+        ?string $search = null
         ) {
         /** @var \Core\Database $db */ //doc block - to use method suggestions below
         $db = App::get('database');
 
         $query = "SELECT * FROM " . static::$table;
         $params = [];
+
+        if($search) {
+            $query .= " WHERE title LIKE ? OR content LIKE ?";
+            $params[] = "%$search%";
+            $params[] = "%$search%";
+        }
 
         $query .= " ORDER BY created_at DESC";
 
@@ -87,10 +94,17 @@ abstract class Model {
         return $db->fetchAll($query, $params, static::class);
     }
 
-    public static function count(): int {
+    public static function count(?string $search = null): int {
         /** @var \Core\Database $db */ 
         $db = App::get('database');
         $query = "SELECT COUNT(*) FROM " . static::$table;
-        return (int) $db->query($query, [])->fetchColumn();
+        $params = [];
+
+        if($search) {
+            $query .= " WHERE title LIKE ? OR content LIKE ?";
+            $params[] = "%$search%";
+            $params[] = "%$search%";
+        }
+        return (int) $db->query($query, $params)->fetchColumn();
     }
 }

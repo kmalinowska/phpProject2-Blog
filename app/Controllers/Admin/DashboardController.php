@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Controllers\Admin;
+use App\Services\Authorization;
 use Core\View;
 use App\Models\Post;
 use App\Models\Comment;
 
 class DashboardController {
     public function index() {
+        Authorization::verify('dashboard');
         $totalPosts = Post::count();
         $totalComments = Comment::count();
 

@@ -3,11 +3,13 @@
 namespace App\Controllers;
 use App\Services\Auth;
 use App\Models\Comment;
+use App\Services\Authorization;
 use Core\Router;
 
 
 class CommentController {
     public function store($id) {
+        Authorization::verify('comment');
         $content = $_POST['content'];
         Comment::create([
             'post_id' => $id,
