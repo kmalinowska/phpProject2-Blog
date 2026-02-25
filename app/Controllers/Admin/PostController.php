@@ -25,12 +25,14 @@ class PostController {
         $total = Post::count($search);
         $totalPages = (int) ceil($total / $limit);
        //list all the posts to manage
+        Authorization::verify('dashboard');
         return View::render(
-           template: 'admin/posts/index',
+           template: 'admin/post/index',
            data: [
                'posts' => $posts,
                'search' => $search,
                'page' => $page,
+               'perPage' => $limit,
                'totalPages' => $totalPages
            ],
            layout: 'layouts/admin'
@@ -38,9 +40,10 @@ class PostController {
     }
 
     public function create() {
+        Authorization::verify('create_post');
         //displays a form
         return View::render(
-            template: 'admin/posts/create',
+            template: 'admin/post/create',
             layout: 'layouts/admin'
         );
     }
@@ -54,7 +57,7 @@ class PostController {
             'user_id' => Auth::user()->id
         ];
         Post::create($data);
-        Router::redirect('/admin/posts');
+        Router::redirect('/admin/post');
     }
 
     public function edit($id) {
@@ -65,7 +68,7 @@ class PostController {
         }
         Authorization::verify('edit_post', $post);
         return View::render(
-            template: 'admin/posts/edit',
+            template: 'admin/post/edit',
             data: ['post' => $post],
             layout: 'layouts/admin'
         );
@@ -82,7 +85,7 @@ class PostController {
         $post->content = $_POST['content'];
         $post->save();
         // + static update ()
-        Router::redirect('/admin/posts');
+        Router::redirect('/admin/post');
     }
 
     public function delete($id) {
@@ -96,6 +99,6 @@ class PostController {
         }
         Authorization::verify('delete_post', $post);
         $post->delete();
-        Router::redirect('/admin/posts');
+        Router::redirect('/admin/post');
     }
 }

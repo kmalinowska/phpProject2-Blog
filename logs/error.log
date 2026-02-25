@@ -18,3 +18,6 @@
 [2026-02;20 15:42:54] Error: Error: Class "app\Models\User" not found in C:\projects\PHP\Project2-Blog\app\Services\Auth.php on line 9
 [2026-02;20 15:47:22] Error: ErrorException: session_regenerate_id(): Session ID cannot be regenerated when there is no active session in C:\projects\PHP\Project2-Blog\app\Services\Auth.php on line 13
 [2026-02;23 10:47:01] Error: Error: Unknown named parameter $id in C:\projects\PHP\Project2-Blog\core\Router.php on line 93
+[2026-02;24 17:55:54] Error: RuntimeException: Error: Template file not found: C:\projects\PHP\Project2-Blog/app/Views/admin/posts/index.php in C:\projects\PHP\Project2-Blog\core\View.php on line 32
+[2026-02;24 17:57:23] Error: ErrorException: Undefined variable $perPage in C:\projects\PHP\Project2-Blog\app\Views\admin\post\index.php on line 31
+[2026-02;24 18:37:52] Error: RuntimeException: Error: Template file not found: C:\projects\PHP\Project2-Blog/app/Views/admin/post/edit.php in C:\projects\PHP\Project2-Blog\core\View.php on line 32
