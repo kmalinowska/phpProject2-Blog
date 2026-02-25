@@ -57,7 +57,7 @@ class PostController {
             'user_id' => Auth::user()->id
         ];
         Post::create($data);
-        Router::redirect('/admin/post');
+        Router::redirect('/admin/posts');
     }
 
     public function edit($id) {
@@ -85,7 +85,7 @@ class PostController {
         $post->content = $_POST['content'];
         $post->save();
         // + static update ()
-        Router::redirect('/admin/post');
+        Router::redirect('/admin/posts');
     }
 
     public function delete($id) {
@@ -99,6 +99,6 @@ class PostController {
         }
         Authorization::verify('delete_post', $post);
         $post->delete();
-        Router::redirect('/admin/post');
+        Router::redirect('/admin/posts');
     }
 }

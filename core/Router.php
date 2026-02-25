@@ -66,13 +66,17 @@ class Router {
             )
         ];
 
-        $this->runMiddleware(
+        $result = $this->runMiddleware(
             $middlewares, 
-            function () use ($route): void{
+            function () use ($route){
                 [$controller, $action] = explode('@', $route['controller']);
-                echo $this->callAction($controller, $action, $route['params']);
+                return $this->callAction($controller, $action, $route['params']);
             }
         );
+
+        if($result !== null) {
+            echo $result;
+        }
     }
 
     //function run all the middleware
